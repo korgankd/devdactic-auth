@@ -24,5 +24,50 @@ angular.module('starter')
 	};
 })
 
-.controller('LoginCtrl', function() {})
-.controller('DashCtrl', function() {});
+.controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
+	$scope.data = {};
+
+	$scope.login = function(data) {
+		AuthService.login(data.username, data.password).then(function(authenticated) {
+			$state.go('main.dash', {}, {reload: true});
+			$scope.setCurrentUsername(data.username);
+		}, function(err) {
+			var alertPopup = $ionicPopup.alert({
+				title: 'Login failed!',
+				template: 'Please check your credentials!'
+			});
+		});
+	};
+})
+
+.controller('DashCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
+	$scope.logout = function() {
+		AuthService.logout();
+		$state.go('login');
+	};
+
+	$scope.performValidRequest = function() {
+		$http.get('http://localhost:8100/valid').then(
+			function(result) {
+				$scope.response = result;
+			});
+	};
+
+	$scope.performUnauthorizedRequest = function() {
+		$http.get('http://localhost:8100/notauthorized').then(
+			function(result) {
+				// No result here
+			}, function(err) {
+				$scope.response = err;
+			});
+	};
+
+	$scope.performInvalidRequest = function() {
+		$http.get('http://localhost:8100/notauthenticated').then(
+			function(result) {
+				// No result here
+			}, function(err) {
+				$scope.response = err;
+			});
+	};
+});
