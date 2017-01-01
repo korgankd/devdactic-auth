@@ -22,6 +22,15 @@ angular.module('starter')
 	$scope.setCurrentUsername = function(name) {
 		$scope.username = name;
 	};
+
+	$scope.SayHello = function() {
+		if($scope.username == 'admin') {
+			$state.go('main.admin', {}, {reload: true});
+		} else {
+			$state.go('main.dash', {}, {reload: true});
+			$scope.performUnauthorizedRequest();
+		}
+	};
 })
 
 .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
@@ -70,4 +79,13 @@ angular.module('starter')
 				$scope.response = err;
 			});
 	};
+
+	$scope.checkAuthorization = function() {
+		if($scope.username == 'admin') {
+			$state.go('main.admin', {}, {reload: true});
+		} else {
+			$state.go('main.dash', {}, {reload: true});
+			alert('else!');
+		}
+	}
 });

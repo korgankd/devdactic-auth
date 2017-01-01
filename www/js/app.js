@@ -82,9 +82,9 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
  
   $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
 });
-
+/*
 .run(function($rootScope, $state, AuthService, AUTH_EVENTS) {
-  $rootScope.$on('$stateChangeStart', function(event, next, nextParams, fromState) {
+  $rootScope.$on($stateChangeStart, function(event, next, nextParams, fromState) {
     if('data' in next && 'authorizedRoles' in next.data) {
       var authorizedRoles = next.data.authorizedRoles;
       if(!AuthService.isAuthorized(authorizedRoles)) {
@@ -100,4 +100,4 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
       }
     }
   });
-})
+}) */

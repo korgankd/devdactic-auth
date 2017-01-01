@@ -1,6 +1,6 @@
 <ion-view>
 	<ion-tabs class="tab-icon-top tabs-balanced">
-	
+
 		<ion-tab title="Dashboard" icon="ion-home" href="#/main/dash">
 			<ion-nav-view name="dash-tab"></ion-nav-view>
 		</ion-tab>
@@ -9,8 +9,8 @@
 			<ion-nav-view name="public-tab"></ion-nav-view>
 		</ion-tab>
 
-		<ion-tab title="Secret" icon="ion-nuclear" href="#/main/admin">
-			<ion-nav-view name="admin-tab"></ion-nav-view>
+		<ion-tab title="Secret" icon="ion-nuclear" href="#/main/admin" ng-click="SayHello()">
+			<ion-nav-view name="admin-tab" ></ion-nav-view>
 		</ion-tab>
 
 	</ion-tabs>
